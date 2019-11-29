@@ -1,6 +1,6 @@
 {
   "name": "laravel-mix-clean-css",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Extension for Laravel Mix that provides clean-css support.",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "email": "mail@marceickhoff.com",
     "url": "https://marceickhoff.com/"
   },
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/marceickhoff/laravel-mix-clean-css/issues"
   },
