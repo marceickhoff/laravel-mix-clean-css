@@ -31,19 +31,6 @@ mix
     level: 2,
     format: mix.inProduction() ? false : 'beautify' // Beautify only in dev mode
   })
-
-  // Run clean-css only on one specific stylesheet
-  .cleanCss({
-    // ...
-  }, 'src/app.scss')
-
-  // Run clean-css only on multiple specific stylesheets
-  .cleanCss({
-    // ...
-  }, [
-    'src/app.scss',
-    'src/app.sass',
-  ])
 ```
 
 For more information about clean-css configurations please refer to their [documentation](https://github.com/jakubpawlowicz/clean-css/blob/master/README.md).
