@@ -37,16 +37,16 @@ class CleanCss {
 		webpackConfig.module.rules.forEach(function (rule) {
 
 			// Skip rules without loaders
-			if (typeof rule.loaders === "undefined") return;
+			if (typeof rule.use === "undefined") return;
 
 			// Go through all loaders of a rule
-			rule.loaders.forEach(function (loader) {
+			rule.use.forEach(function (loader) {
 
 				// Search for postcss-loader
 				if (typeof loader === "object" && loader.loader === insertBefore) {
 
 					// Insert clean-css right before
-					rule.loaders.splice(rule.loaders.indexOf(insertBefore) - 1, 0, {
+					rule.use.splice(rule.use.indexOf(insertBefore) - 1, 0, {
 						loader: "clean-css-loader",
 						options: options
 					});
