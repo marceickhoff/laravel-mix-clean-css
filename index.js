@@ -8,7 +8,7 @@ class CleanCss {
 	 * @return {Array}
 	 */
 	dependencies() {
-		return ['clean-css-loader', 'escape-string-regexp'];
+		return ['clean-css-loader'];
 	}
 
 	/**
