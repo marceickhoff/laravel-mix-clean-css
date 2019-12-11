@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const path = require('path');
 
 class CleanCss {
 
@@ -15,10 +16,26 @@ class CleanCss {
 	 * Register the component.
 	 *
 	 * @param  {Object} options CleanCSS configuration object
+	 * @param  {String|Array} files (optional) Files to apply clean-css to
 	 * @return {void}
 	 */
-	register(options) {
+	register(options, files = null) {
+
+		// Convert single given file to array
+		if (typeof files === 'string') files = [files];
+
+		// Make every file path absolute
+		if (Array.isArray(files)) {
+			Object.keys(files).forEach(function (key) {
+				if (!path.isAbsolute(files[key])) {
+					files[key] = path.resolve(files[key]);
+				}
+			});
+		}
+
+		// Create properties
 		this.options = options;
+		this.files = files;
 	}
 
 	/**
@@ -29,6 +46,7 @@ class CleanCss {
 	 */
 	webpackConfig(webpackConfig) {
 		let options = this.options;
+		let files = this.files;
 
 		// Where to insert the clean-css-loader
 		const insertBefore = "postcss-loader";
@@ -36,8 +54,8 @@ class CleanCss {
 		// Go through all rules
 		webpackConfig.module.rules.forEach(function (rule) {
 
-			// Skip rules without loaders
-			if (typeof rule.use === "undefined") return;
+			// Skip rules without loaders or files that are not in the file list
+			if (typeof rule.use === "undefined" || (files && !files.includes(rule.test))) return;
 
 			// Go through all loaders of a rule
 			rule.use.forEach(function (loader) {
